@@ -41,7 +41,6 @@ const makeCall = ({ method, endpoint, body }: ICallApi) => {
   }
   return client(params)
     .then(resp => {
-      console.log(resp, body, 'success')
       return resp
     })
     .catch(err => {

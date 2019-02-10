@@ -1,13 +1,14 @@
 import * as React from 'react'
 import TaskProps from './Task'
-import { ITask } from '../store/tasks/types'
 import Grid from '@material-ui/core/Grid'
 import Typography from '@material-ui/core/Typography'
 import Task from './Task'
+import { ITask } from '../store/projects/types';
 
 interface TaskListProps {
   status: string
   tasks: ITask[]
+  
   handleChangeStatus: any
 }
 

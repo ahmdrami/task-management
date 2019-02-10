@@ -1,17 +1,17 @@
 import * as React from 'react'
 import Typography from '@material-ui/core/Typography'
-import { ITask, TASK_STATUS } from '../store/tasks/types'
+import { ITask, TASK_STATUS } from '../store/projects/types'
 import Grid from '@material-ui/core/Grid'
 import Card from '@material-ui/core/Card'
-import CardActions from '@material-ui/core/CardActions'
 import CardContent from '@material-ui/core/CardContent'
 import {
   FormControl,
   InputLabel,
   Select,
   FilledInput,
-  MenuItem
+  MenuItem,
 } from '@material-ui/core'
+import { connect } from 'react-redux'
 
 interface SingleTask {
   handleChangeStatus: any
@@ -23,11 +23,13 @@ const Task: React.SFC<ITask & SingleTask> = ({
   status,
   timer,
   id,
-  handleChangeStatus
+  projectId,
+  handleChangeStatus,
 }) => {
+  console.error('Task re-renders')
   const handleChange = (e: any) => {
     handleChangeStatus(
-      { title, description, status, timer, id },
+      { title, description, status, timer, projectId, id },
       e.target.value
     )
   }
@@ -56,4 +58,8 @@ const Task: React.SFC<ITask & SingleTask> = ({
     </Grid>
   )
 }
+
+// const
+// export default connect()(Task)
+
 export default Task

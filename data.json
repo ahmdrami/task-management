@@ -1,26 +1,38 @@
 {
-  "tasks": [
+  "projects": [
     {
-      "title": "Asdad",
-      "description": "adasdasd",
-      "status": "Completed",
       "id": 1,
-      "timer": 0
+      "name": "Short-Term Goals"
     },
     {
-      "title": "Asdad",
-      "description": "adasdasd",
-      "status": "Completed",
-      "id": 1549316280268
-    },
-    {
-      "title": "test",
-      "description": "test2",
-      "status": "Not Started",
-      "id": 1549316280269
+      "id": 2,
+      "name": "Long-Term Goals"
     }
   ],
-  "profile": {
-    "name": "typicode"
-  }
+  "tasks": [
+    {
+      "title": "Learn Redux",
+      "description": "The store, actions, and reducers, oh my!",
+      "status": "In progress",
+      "timer": 86,
+      "projectId": 1,
+      "id": 1
+    },
+    {
+      "title": "Peace on Earth",
+      "description": "No big deal.",
+      "status": "In progress",
+      "timer": 132,
+      "projectId": 2,
+      "id": 2
+    },
+    {
+      "title": "Create Facebook for dogs",
+      "description": "The hottest new social network",
+      "status": "In progress",
+      "timer": 332,
+      "projectId": 1,
+      "id": 3
+    }
+  ]
 }

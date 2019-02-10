@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { ITask } from '../store/tasks/types';
+import { ITask } from '../store/projects/types'
 
 export enum END_POINTS {
   BASE_URL = 'http://localhost:3000'
@@ -12,5 +12,6 @@ export const client = axios.create({
   }
 })
 
-export const fetchTasks = () => client.get('/tasks')
-export const changeStatus = (id: number, data: ITask) => client.put(`/tasks/${id}`, data)
+export const fetchProjects = () => client.get('/projects?_embed=tasks')
+export const changeStatus = (id: number, data: ITask) =>
+  client.put(`/tasks/${id}`, data)

@@ -1,7 +1,11 @@
-import { TaskActions, ITask } from './types'
+import { TaskActions, ITask, IProject } from './types'
 import { CALL_API } from '../../middleware/api'
-
+import { ApplicationState } from '../reducers'
+import { createSelector } from 'reselect'
+import { getSearchTerm } from '../page/action'
 // Api middleware example
+
+
 export const createTask = (task: ITask) => {
   return {
     [CALL_API]: {
@@ -25,21 +29,21 @@ export const createTask = (task: ITask) => {
   }
 }
 
-// export const fetchTasks = () => ({
-//   [CALL_API]: {
-//     types: [
-//       TaskActions.FETCH_TASKS_STARTED,
-//       TaskActions.FETCH_TASKS_SUCCEEDED,
-//       TaskActions.FETCH_TASKS_FAILED
-//     ],
-//     endpoint: '/tasks',
-//     method: 'get'
-//   }
-// })
-
-export const fetchTasks = () => ({
-  type: TaskActions.FETCH_TASKS_STARTED
+export const fetchProjects = () => ({
+  [CALL_API]: {
+    types: [
+      TaskActions.FETCH_PROJECTS_STARTED,
+      TaskActions.FETCH_PROJECTS_SUCCEEDED,
+      TaskActions.FETCH_PROJECTS_FAILED
+    ],
+    endpoint: '/projects?_embed=tasks',
+    method: 'get'
+  }
 })
+
+// export const fetchTasks = () => ({
+//   type: TaskActions.FETCH_TASKS_STARTED
+// })
 
 export const editTask = (task: ITask, status: string) => ({
   [CALL_API]: {
@@ -59,13 +63,21 @@ const progressTimerStart = (taskId: string) => ({
   payload: taskId
 })
 
-export const filterTask = (searchTerm: string) => ({
-  type: TaskActions.FILTER_TASKS,
-  payload: searchTerm
-})
-
-export const getFilterTasks = (tasks: ITask[], searchTerm: string) => (
-  tasks.filter(task =>
-    task.title.match(new RegExp(searchTerm, 'i'))
+export const getTasksByProjectId = (store: ApplicationState) => {
+  if (!store.page.currentProjectId) {
+    return []
+  }
+  const currentProject: any = store.projects.items.find(
+    project => project.id === store.page.currentProjectId
   )
+
+
+  return currentProject.tasks
+}
+
+export const getFilterTasks = createSelector(
+  [getTasksByProjectId, getSearchTerm],
+  (tasks: ITask[], searchTerm: string) =>
+    tasks.filter(task => task.title.match(new RegExp(searchTerm, 'i')))
 )
+

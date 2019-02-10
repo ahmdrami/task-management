@@ -1,12 +1,16 @@
-import { TaskState } from './tasks/types'
-import { taskReducer } from './tasks/reducer'
-import { combineReducers, Dispatch, Action, AnyAction } from 'redux'
+import { projectReducer } from './projects/reducer'
+import { combineReducers } from 'redux'
+import { IProjectState } from './projects/types';
+import { pageReducer } from './page/reducer';
+import { IPageState } from './page/types';
 
 export interface ApplicationState {
-  tasks: TaskState
+  page: IPageState,
+  projects: IProjectState
 }
 export const rootReducer = combineReducers<ApplicationState>({
-  tasks: taskReducer
+  page: pageReducer,
+  projects: projectReducer
 })
 
 

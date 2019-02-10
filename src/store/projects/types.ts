@@ -1,4 +1,7 @@
 export enum TaskActions {
+  FETCH_PROJECTS_STARTED = 'FETCH_PROJECTS_STARTED',
+  FETCH_PROJECTS_SUCCEEDED = 'FETCH_PROJECTS_SUCCEEDED',
+  FETCH_PROJECTS_FAILED = 'FETCH_PROJECTS_FAILED',
   CREATE_TASK_STARTED = 'CREATE_TASK_STARTED',
   CREATE_TASK_SUCCEEDED = 'CREATE_TASK_SUCCEEDED',
   CREATE_TASK_FAILED = 'CREATE_TASK_FAILED',
@@ -11,22 +14,28 @@ export enum TaskActions {
   TIMER_STARTED = 'TIMER_STARTED',
   FILTER_TASKS = 'FILTER_TASK'
 }
-export interface TaskState {
-  tasks: ITask[]
-  fetching: boolean
-  searchTerm: string
+
+export const TASK_STATUS = {
+  NOT_STARTED: 'Not started',
+  IN_PROGRESS: 'In progress',
+  COMPLETED: 'Completed'
 }
 
+export interface IProjectState {
+  items: IProject[]
+  fetching: boolean
+}
+
+export interface IProject {
+  id: number
+  name: string
+  tasks: ITask[]
+}
 export interface ITask {
   id?: number
   title: string
   description: string
-  status: string,
+  status: string
   timer?: number
-}
-
-export const TASK_STATUS = {
-  NOT_STARTED : 'Not Started',
-  IN_PROGRESS : 'In Progress',
-  COMPLETED : 'Completed'
+  projectId: number
 }
